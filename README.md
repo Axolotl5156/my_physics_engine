@@ -1,11 +1,11 @@
-# MY PHYSICS ENGINE
+# MY PHYSICS ENGINE
 
-## introduction
+## introduction
 
 This is a personal project  
 a simple 2D physics engine, to practice my C++
 
-## How to use
+## How to use
 
 This project only works on Linux (for now...)
 
@@ -17,7 +17,7 @@ I used some C++ Libraries
 
 you'll also need **CMake** version 3.28.3 or above
 
-### build
+### build
 
 Download the repo
 
@@ -41,7 +41,7 @@ $ make
 ```
 the binary will be in `build/app/my_physic_engine`  
 
-### run
+### run
 
 ```
 $ ./my_physic_engine
@@ -61,7 +61,7 @@ The project is seperate in 4 parts
 3. the simulation
 4. the main app
 
-### the engine
+### the engine
 
 is in `engine/`  
 each object is built as a `Body` object  
@@ -81,7 +81,7 @@ This is where I set up all settings for running one case (for example the bounci
 
 it's where `main.cpp` come in, the user can choose a simulation to run, and the corresponding function from the correct class will be called
 
-## More to come
+## More to come
 
 I have some plans to upgrade this tiny project
 - add more simulation cases
