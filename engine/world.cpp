@@ -1,5 +1,6 @@
 #include "world.hpp"
 #include <iostream>
+#include <math.h>
 
 World::World(float width, float height):
 m_width(width),
@@ -72,10 +73,32 @@ void World::bodies_to_bodies_collision()
 
             if(overlap_x > 0 && overlap_y > 0)
             {
-                body_a->set_vel_x(-body_a->get_pos_x());
-                body_a->set_vel_y(-body_a->get_vel_y());
-                body_b->set_vel_x(-body_b->get_vel_x());
-                body_b->set_vel_y(-body_b->get_vel_y());
+                // normal vector to collision
+                float normal_x = body_a->get_pos_x() - body_b->get_pos_x();
+                float normal_y = body_a->get_pos_y() - body_b->get_pos_y();
+                float dist = sqrt(normal_x*normal_x + normal_y*normal_y);
+                normal_x = normal_x / dist;
+                normal_y = normal_y / dist;
+
+                // tangeante vector to collision
+                float tangeante_x = -normal_y;
+                float tangeante_y = normal_x;
+
+                //project the velocity on normal and tangeante axis
+                float velocity_a_normal = body_a->get_vel_x()*normal_x + body_a->get_vel_y()*normal_y;
+                float velocity_a_tangeante = body_a->get_vel_x()*tangeante_x + body_a->get_vel_y()*tangeante_y;
+                float velocity_b_normal = body_b->get_vel_x()*normal_x + body_b->get_vel_y()*normal_y;
+                float velocity_b_tangeante = body_b->get_vel_x()*tangeante_x + body_b->get_vel_y()*tangeante_y;
+
+                //calculate new velocity on normal axis
+                float vel_a_normal_mass = (body_a->get_vel_x()*(body_a->get_mass()-body_b->get_mass())+2*body_b->get_mass()*velocity_b_normal)/(body_a->get_mass()+body_b->get_mass());
+                float vel_b_normal_mass = (body_b->get_vel_x()*(body_b->get_mass()-body_a->get_mass())+2*body_a->get_mass()*velocity_a_normal)/(body_a->get_mass()+body_b->get_mass());
+
+                //project new velicity on xy axis
+                body_a->set_vel_x(vel_a_normal_mass*normal_x + velocity_a_tangeante*tangeante_x);
+                body_a->set_vel_y(vel_a_normal_mass*normal_y + velocity_a_tangeante*tangeante_y);
+                body_b->set_vel_x(vel_b_normal_mass*normal_x + velocity_b_tangeante*tangeante_x);
+                body_b->set_vel_y(vel_b_normal_mass*normal_y + velocity_b_tangeante*tangeante_y);
             }
 
         }

@@ -58,7 +58,10 @@ You'll be asked to choose a simulation to run. Select one and enjoy!
 
 ## Content
 
-For now, the engine can only run one simple simulation, a falling ball in a gravity field  
+For now, two cases are available
+- a falling ball in a gravity field
+- some floating balls without gravity  
+
 More to come...
 
 ## How does it work
@@ -71,7 +74,7 @@ The project is seperate in 4 parts
 
 ### the engine
 
-is in `engine/`  
+is in `engine/` (duh)  
 each object is built as a `Body` object  
 they have a `Shape` attribut, which is an abstract class that inherits different geometries, such as `CircleShape`  
 `Body` is for all the physics (mass, position, velocity...), and `Shape` is only for the geometry. It is more convenient to separate, especially when it comes to the rendering part..  

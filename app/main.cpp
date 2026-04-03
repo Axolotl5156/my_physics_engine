@@ -3,6 +3,7 @@
 
 #include "bouncing_ball.hpp"
 #include "floating_balls.hpp"
+#include "test_sim.hpp"
 
 int main()
 {
@@ -23,7 +24,13 @@ int main()
 
     switch(choice)
     {
+        case -1:
+            std::cout << "case -1" << std::endl;
+            simulation = std::make_unique<TestSim>();
+            can_simulate = true;
+            break;
         case 1:
+            std::cout << "case 1" << std::endl;
             simulation = std::make_unique<BouncingBallSimulation>();
             can_simulate = true;
             break;
