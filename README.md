@@ -15,7 +15,9 @@ I used some C++ Libraries
 - Catch2
 - SFML
 
-you'll also need **CMake** version 3.28.3 or above, and **Doxygen** for documentation.
+you'll also need **CMake** version 3.28.3 or above for the build  
+**Doxygen** for documentation,  
+and **fmpgeg** for the recording (only if you wanna record).
 
 ### build
 
