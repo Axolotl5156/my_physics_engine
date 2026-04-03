@@ -15,7 +15,7 @@ I used some C++ Libraries
 - Catch2
 - SFML
 
-you'll also need **CMake** version 3.28.3 or above
+you'll also need **CMake** version 3.28.3 or above, and **Doxygen** for documentation.
 
 ### build
 
@@ -40,6 +40,12 @@ $ cmake ..
 $ make
 ```
 the binary will be in `build/app/my_physic_engine`  
+
+generate the documentation with
+```
+$ make doc
+```
+the docs will be available in `build/docs/html/index.html`
 
 ### run
 

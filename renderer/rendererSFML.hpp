@@ -3,7 +3,11 @@
 #include <SFML/Graphics.hpp>
 #include "world.hpp"
 
-
+/**
+ * @brief renderer based on SFML Library
+ * 
+ * manage the window, and the display of all Body in the World
+ */
 class RendererSFML
 {
 
@@ -15,18 +19,90 @@ class RendererSFML
 
     public :
 
+        /**
+         * @brief main constructor
+         * @param width window width
+         * @param height window height
+         * @param title the window title
+         * 
+         * the width and height must be the same as the world's wigth and height
+         * default frame limit is set to 60
+         * default background color is set to (20,20,20,255)
+         */
         RendererSFML(float width, float height, const std::string &title);
+
+        /**
+         * @brief secondary constructor
+         * @param width window width
+         * @param height window height
+         * @param title the window title
+         * @param frame_limit the window frame limit
+         * 
+         * the width and height must be the same as the world's wigth and height
+         * default background color is set to (20,20,20,255)
+         */
         RendererSFML(float width, float height, const std::string &title, int frame_limit);
+
+        /**
+         * @brief secondary constructor
+         * @param width window width
+         * @param height window height
+         * @param title the window title
+         * @param bg_color background color
+         * 
+         * the width and height must be the same as the world's wigth and height
+         * default frame limit is set to 60
+         */
         RendererSFML(float width, float height, const std::string &title, sf::Color bg_color);
+
+
+        /**
+         * @brief secondary constructor
+         * @param width window width
+         * @param height window height
+         * @param title the window title
+         * @param frame_limit the window frame limit
+         * @param bg_color background color
+         * 
+         * the width and height must be the same as the world's wigth and height
+         */
         RendererSFML(float width, float height, const std::string &title, int frame_limit, sf::Color bg_color);
 
+        /**
+         * @brief background color setter
+         * @param color new background color
+         */
         void set_bg_color(sf::Color color);
 
+        /**
+         * @brief check if window is still open
+         */
         bool is_open();
+
+        /**
+         * @brief check if the simulation has been paused
+         */
         bool is_paused();
+
+        /**
+         * @brief handle input events from user
+         */
         void handle_events();
+
+        /**
+         * @brief render one frame of the simulation
+         * @param world the world to draw
+         */
         void draw_frame(World &world);
+
+        /**
+         * @brief clear window
+         */
         void clear();
+
+        /**
+         * @brief display on window what has been drawn
+         */
         void display();
 
 };

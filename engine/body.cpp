@@ -11,7 +11,6 @@ m_mass(mass),
 m_shape(std::move(shape))
 {}
 
-
 Body::Body(float pos_x, float pos_y, float vel_x, float vel_y, float mass, std::unique_ptr<Shape> shape):
 m_pos_x(pos_x),
 m_pos_y(pos_y),
