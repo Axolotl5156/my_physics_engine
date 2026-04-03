@@ -13,6 +13,13 @@ class Shape
         Shape() = default;
         virtual ~Shape() = default;
         
+        /**
+         * @brief get half of the shape height
+         */
         virtual float get_half_height() = 0;
+        
+        /**
+         * @brief get half of the shape width
+         */
         virtual float get_half_width() = 0;
 };

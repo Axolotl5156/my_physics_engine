@@ -133,7 +133,7 @@ class Body
 
         /**
          * @brief force y setter
-         * @param fx new y force
+         * @param fy new y force
          * 
          * note that this will not juste add the new force, but replace it
          */
