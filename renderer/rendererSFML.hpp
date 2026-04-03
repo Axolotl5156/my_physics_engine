@@ -16,6 +16,10 @@ class RendererSFML
         sf::RenderWindow m_window;
         sf::Color m_bg_color;
         bool m_is_paused;
+        bool m_recording;
+        std::string m_output_path;
+        std::string m_tmp_folder;
+        int m_frame_id;
 
     public :
 
@@ -45,7 +49,7 @@ class RendererSFML
 
         /**
          * @brief secondary constructor
-         * @param width window width
+         * @param width window widthint m_frame_id
          * @param height window height
          * @param title the window title
          * @param bg_color background color
@@ -54,7 +58,6 @@ class RendererSFML
          * default frame limit is set to 60
          */
         RendererSFML(float width, float height, const std::string &title, sf::Color bg_color);
-
 
         /**
          * @brief secondary constructor
@@ -105,4 +108,30 @@ class RendererSFML
          */
         void display();
 
+        /**
+         * @brief enable recording
+         * @param output_pah path to save the video
+         */
+        void enable_recording(const std::string &output_path);
+
+        /**
+         * @brief check if recording has been activated
+         */
+        bool is_recording();
+
+        /**
+         * @brief capture a frame into a jpg file
+         * 
+         * all jpg files will be used to create the video of the simulation
+         * only call if recording has been activate before
+         */
+        void capture_frame();
+
+        /**
+         * @brief combine all frame into a video
+         * 
+         * only call if recording has been activate before
+         */
+        void finalize_recording();
+        
 };
