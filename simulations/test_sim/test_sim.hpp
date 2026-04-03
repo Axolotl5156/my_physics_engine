@@ -13,7 +13,7 @@ class TestSim : public ISimulation
         /**
          * @brief run testing sim
          */
-        void run();
+        void run(AppContext config);
 
 };
 

@@ -13,7 +13,7 @@ class BouncingBallSimulation : public ISimulation
         /**
          * @brief run the bouncing ball simulation
          */
-        void run();
+        void run(AppContext config);
 
 };
 

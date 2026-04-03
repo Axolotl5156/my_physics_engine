@@ -7,5 +7,6 @@ add_library(test_sim ${SRC} ${HEADER})
 
 target_link_libraries(test_sim engine)
 target_link_libraries(test_sim rendererSFML)
+target_link_libraries(test_sim core)
 
 target_include_directories(test_sim PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/..)

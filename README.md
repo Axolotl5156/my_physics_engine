@@ -54,7 +54,13 @@ the docs will be available in `build/docs/html/index.html`
 ```
 $ ./my_physic_engine
 ```
-You'll be asked to choose a simulation to run. Select one and enjoy!
+You'll be greeted by a simple command prompt
+here you can
+- run a simulation
+- enable or disable the video recording (for now, all videos are save in the same file, so move your video before recording another one)
+- check the list of all simulations
+- HELP !!!!
+- quit :(
 
 ## Content
 
@@ -90,11 +96,12 @@ This is where I set up all settings for running one case (for example the bounci
 
 ### the main app
 
-it's where `main.cpp` come in, the user can choose a simulation to run, and the corresponding function from the correct class will be called
+it's where the interface with the user came from
+everything is handle by the UserInterface class
 
 ## More to come
 
 I have some plans to upgrade this tiny project
 - add more simulation cases
-- add a way to save the results as a video file
+- add the possiblity to choose where to save the video
 - allow the user to run a personalized simulation described in a JSON file

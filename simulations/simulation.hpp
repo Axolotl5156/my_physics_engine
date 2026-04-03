@@ -1,5 +1,7 @@
 #pragma once
 
+#include "app_config.hpp"
+
 /**
  * @brief abstract class for all simulations
  */
@@ -14,6 +16,6 @@ class ISimulation
         /**
          * @brief will run whatever simulation it is
          */
-        virtual void run() = 0;
+        virtual void run(AppContext config) = 0;
 
 };
