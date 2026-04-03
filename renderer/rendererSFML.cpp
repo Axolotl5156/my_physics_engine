@@ -6,7 +6,7 @@
 
 RendererSFML::RendererSFML(float width, float height, const std::string &title):
 m_is_paused(false),
-m_bg_color((20,20,20,255)),
+m_bg_color(sf::Color(20,20,20,255)),
 m_recording(false)
 {
     m_window.create({static_cast<unsigned int>(width), static_cast<unsigned int>(height)}, title);
@@ -15,7 +15,7 @@ m_recording(false)
 
 RendererSFML::RendererSFML(float width, float height, const std::string &title, int frame_limit):
 m_is_paused(false),
-m_bg_color((20,20,20,255)),
+m_bg_color(sf::Color(20,20,20,255)),
 m_recording(false)
 {
     m_window.create({static_cast<unsigned int>(width), static_cast<unsigned int>(height)}, title);
@@ -63,7 +63,7 @@ void RendererSFML::clear()
 void RendererSFML::display()
 {
     m_window.display();
-    if(m_recording)
+    if(m_recording && !m_is_paused)
         capture_frame();
 }
 

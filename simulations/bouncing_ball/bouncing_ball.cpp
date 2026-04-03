@@ -18,7 +18,7 @@ void BouncingBallSimulation::run()
     world.add_body(std::move(ball));
 
     RendererSFML renderer(world.get_width(), world.get_height(), "Bouncing ball", sf::Color(20,20,20,255));
-    renderer.enable_recording("video.mp4");
+    // renderer.enable_recording("video.mp4");
 
     sf::Clock clock;
 
