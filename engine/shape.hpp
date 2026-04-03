@@ -1,5 +1,11 @@
 #pragma once
 
+/**
+ * @brief Abstract class for geometry
+ * 
+ * this abstract class will inherite different shapes
+ * all shapes will be able to get half of their height and width
+ */
 class Shape
 {
     public :
