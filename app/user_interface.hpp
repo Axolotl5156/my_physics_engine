@@ -27,8 +27,8 @@ class UserInterface
         void handle_command(const std::string &input);
         
         void cmd_list();
-        void cmd_record(const std::string &arg);
-        void cmd_run(const std::string &sim_name);
+        void cmd_record(const std::vector<std::string> &args);
+        void cmd_run(const std::vector<std::string> &args);
         void cmd_help();
         void cmd_quit();
         void cmd_testsim();
