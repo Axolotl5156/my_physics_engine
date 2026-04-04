@@ -10,6 +10,11 @@
 
 #include "app_config.hpp"
 
+/**
+ * @brief the front line of the programm
+ * 
+ * this class handle all user input
+ */
 class UserInterface
 {
 
@@ -31,6 +36,10 @@ class UserInterface
     public :
 
         UserInterface();
+
+        /**
+         * @brief the starting point of the program
+         */
         void run();
         
 };
