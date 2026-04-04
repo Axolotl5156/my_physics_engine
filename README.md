@@ -57,7 +57,7 @@ $ ./my_physic_engine
 You'll be greeted by a simple command prompt
 here you can
 - run a simulation
-- enable or disable the video recording (for now, all videos are save in the same file, so move your video before recording another one)
+- enable or disable the video recording
 - check the list of all simulations
 - HELP !!!!
 - quit :(
