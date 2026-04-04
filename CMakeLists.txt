@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.28.3)
 
 project(my_physic_engine)
 
+add_subdirectory(core)
 add_subdirectory(engine)
 add_subdirectory(renderer)
 add_subdirectory(simulations)

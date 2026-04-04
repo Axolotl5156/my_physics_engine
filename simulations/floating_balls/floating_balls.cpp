@@ -14,7 +14,7 @@ struct BodyInit
     float vel_x, vel_y;
 };
 
-void FloatingBalls::run()
+void FloatingBalls::run(AppContext config)
 {
 
     World world(800, 600, 0.f, 1.f);
@@ -44,7 +44,9 @@ void FloatingBalls::run()
     }
 
     RendererSFML renderer(world.get_width(), world.get_height(), "floating balls");
-    renderer.enable_recording("video.mp4");
+
+    if(config.record_enable)
+        renderer.enable_recording(config.output_file);
 
     sf::Clock clock;
 
@@ -64,6 +66,6 @@ void FloatingBalls::run()
         renderer.display();
     }
 
-    if(renderer.is_recording())
+    if(config.record_enable)
         renderer.finalize_recording();
 }

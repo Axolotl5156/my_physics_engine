@@ -6,7 +6,7 @@
 #include "circleShape.hpp"
 #include "rendererSFML.hpp"
 
-void BouncingBallSimulation::run()
+void BouncingBallSimulation::run(AppContext config)
 {
     World world(800, 600);
     world.set_gravity(981.f);
@@ -18,7 +18,9 @@ void BouncingBallSimulation::run()
     world.add_body(std::move(ball));
 
     RendererSFML renderer(world.get_width(), world.get_height(), "Bouncing ball", sf::Color(20,20,20,255));
-    // renderer.enable_recording("video.mp4");
+    
+    if(config.record_enable)
+        renderer.enable_recording(config.output_file);
 
     sf::Clock clock;
 
@@ -40,7 +42,7 @@ void BouncingBallSimulation::run()
 
     }
 
-    if(renderer.is_recording())
+    if(config.record_enable)
         renderer.finalize_recording();
 
 }

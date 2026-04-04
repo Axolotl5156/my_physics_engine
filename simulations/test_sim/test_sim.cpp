@@ -6,7 +6,7 @@
 #include "circleShape.hpp"
 #include "rendererSFML.hpp"
 
-void TestSim::run()
+void TestSim::run(AppContext config)
 {
 
     World world(800, 800);
@@ -23,6 +23,9 @@ void TestSim::run()
     world.add_body(std::move(body_2));
 
     RendererSFML renderer(world.get_width(), world.get_height(), "test sim");
+
+    if(config.record_enable)
+        renderer.enable_recording(config.output_file);
 
     sf::Clock clock;
 
@@ -44,7 +47,7 @@ void TestSim::run()
 
     }
 
-    if(renderer.is_recording())
+    if(config.record_enable)
         renderer.finalize_recording();
 
 }

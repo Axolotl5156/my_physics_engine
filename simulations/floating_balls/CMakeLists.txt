@@ -7,5 +7,6 @@ add_library(floating_balls ${SRC} ${HEADER})
 
 target_link_libraries(floating_balls engine)
 target_link_libraries(floating_balls rendererSFML)
+target_link_libraries(floating_balls core)
 
 target_include_directories(floating_balls PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/..)
