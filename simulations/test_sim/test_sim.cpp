@@ -14,8 +14,8 @@ void TestSim::run(AppContext config)
     world.set_gravity(0.f);
     world.set_restition(1.f);
 
-    world.add_circle(100.f, 100.f, 100.f, 0.f, 1.f, 20.f);
-    world.add_circle(100.f, 200.f, 100.f, 100.f, 1.f, 20.f);
+    world.add_circle(100.f, 100.f, 100.f, 0.f, 1.f, 20.f, BodyType::Dynamic);
+    world.add_circle(100.f, 200.f, 100.f, 100.f, 1.f, 20.f, BodyType::Dynamic);
 
     RendererSFML renderer(world.get_width(), world.get_height(), "test sim");
 

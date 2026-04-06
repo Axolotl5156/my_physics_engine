@@ -45,7 +45,7 @@ TEST_CASE("RendererSFML draws a simple body", "[renderer]")
     World world(800, 600);
 
     auto shape = std::make_unique<CircleShape>(10.f);
-    auto body = std::make_unique<Body>(100.f, 100.f, 1.f, std::move(shape));
+    auto body = std::make_unique<Body>(100.f, 100.f, 1.f, std::move(shape), BodyType::Dynamic);
 
     world.add_body(std::move(body));
 
@@ -65,7 +65,7 @@ TEST_CASE("RendererSFML handles multiple bodies", "[renderer]")
     for (int i = 0; i < 10; ++i)
     {
         auto shape = std::make_unique<CircleShape>(10.f);
-        auto body = std::make_unique<Body>(i * 20.f, i * 20.f, 1.f, std::move(shape));
+        auto body = std::make_unique<Body>(i * 20.f, i * 20.f, 1.f, std::move(shape), BodyType::Dynamic);
 
         world.add_body(std::move(body));
     }

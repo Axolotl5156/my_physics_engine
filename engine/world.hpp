@@ -93,8 +93,9 @@ class World
          * @param vel_y initiale y velocity
          * @param mass the body's mass
          * @param radius the circle's radius
+         * @param type type of the circle, static or dynamic
          */
-        void add_circle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float radius);
+        void add_circle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float radius, BodyType type);
 
         /**
          * @brief add a circle to the world
@@ -105,8 +106,9 @@ class World
          * @param mass the body's mass
          * @param width the rectangle's width
          * @param height the rectangle's height
+         * @param type type of the rectangle, static or dynamic
          */
-        void add_rectangle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float width, float height);
+        void add_rectangle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float width, float height, BodyType type);
 
         /**
          * @brief update all bodies

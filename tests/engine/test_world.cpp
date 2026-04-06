@@ -27,7 +27,7 @@ TEST_CASE("Body falls due to gravity", "[world]")
 
     std::unique_ptr<Body> body = std::make_unique<Body>(
         100.f, 100.f, 1.f,
-        std::make_unique<CircleShape>(10.f)
+        std::make_unique<CircleShape>(10.f), BodyType::Dynamic
     );
 
     Body* ptr = body.get();
@@ -44,7 +44,7 @@ TEST_CASE("Body bounces on ground", "[world]")
 
     std::unique_ptr<Body> body = std::make_unique<Body>(
         100.f, 590.f, 1.f,
-        std::make_unique<CircleShape>(10.f)
+        std::make_unique<CircleShape>(10.f), BodyType::Dynamic
     );
 
     body->set_vel_x(0.f);

@@ -8,7 +8,7 @@ TEST_CASE("Test Body setters and getters", "[body]")
 {
 
     std::unique_ptr<CircleShape> shape = std::make_unique<CircleShape>(8.f);
-    Body body(1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, std::move(shape));
+    Body body(1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, std::move(shape), BodyType::Dynamic);
 
     REQUIRE(body.get_pos_x() == Catch::Approx(1.f));
     REQUIRE(body.get_pos_y() == Catch::Approx(2.f));
@@ -41,7 +41,7 @@ TEST_CASE("Test Body setters and getters", "[body]")
 TEST_CASE("Body update changes position with velocity", "[body]")
 {
     std::unique_ptr<CircleShape> shape = std::make_unique<CircleShape>(10.f);
-    Body body(0.f, 0.f, 1.f, std::move(shape));
+    Body body(0.f, 0.f, 1.f, std::move(shape), BodyType::Dynamic);
 
     body.set_vel_x(10.f);
 
@@ -55,7 +55,7 @@ TEST_CASE("Body update changes position with velocity", "[body]")
 TEST_CASE("Body reacts to applied force", "[body]")
 {
     std::unique_ptr<CircleShape> shape = std::make_unique<CircleShape>(10.f);
-    Body body(0.f, 0.f, 1.f, std::move(shape));
+    Body body(0.f, 0.f, 1.f, std::move(shape), BodyType::Dynamic);
 
     body.apply_force(10.f, 0.f);
     body.update(1.0f);

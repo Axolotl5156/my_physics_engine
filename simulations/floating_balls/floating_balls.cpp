@@ -33,7 +33,7 @@ void FloatingBalls::run(AppContext config)
 
     for(BodyInit init : inits)
     {
-        world.add_circle(init.pos_x, init.pos_y, init.vel_x, init.vel_y, 1.f, 15.f);
+        world.add_circle(init.pos_x, init.pos_y, init.vel_x, init.vel_y, 1.f, 15.f, BodyType::Dynamic);
     }
 
     RendererSFML renderer(world.get_width(), world.get_height(), "floating balls");

@@ -61,17 +61,17 @@ void World::add_body(std::unique_ptr<Body> body)
     m_bodies.push_back(std::move(body));
 }
 
-void World::add_circle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float radius)
+void World::add_circle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float radius, BodyType type)
 {
     std::unique_ptr<Shape> shape = std::make_unique<CircleShape>(radius);
-    std::unique_ptr<Body> body = std::make_unique<Body>(pos_x, pos_y, vel_x, vel_y, mass, std::move(shape));
+    std::unique_ptr<Body> body = std::make_unique<Body>(pos_x, pos_y, vel_x, vel_y, mass, std::move(shape), type);
     add_body(std::move(body));
 }
 
-void World::add_rectangle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float width, float height)
+void World::add_rectangle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float width, float height, BodyType type)
 {
     std::unique_ptr<Shape> shape = std::make_unique<RectangleShape>(width, height);
-    std::unique_ptr<Body> body = std::make_unique<Body>(pos_x, pos_y, vel_x, vel_y, mass, std::move(shape));
+    std::unique_ptr<Body> body = std::make_unique<Body>(pos_x, pos_y, vel_x, vel_y, mass, std::move(shape), type);
     add_body(std::move(body));
 }
 
@@ -83,6 +83,9 @@ void World::bodies_to_bodies_collision()
         {
             std::unique_ptr<Body>& body_a = m_bodies[i];
             std::unique_ptr<Body>& body_b = m_bodies[j];
+
+            if(body_a->is_static() && body_b->is_static())
+                continue;
 
             float dx = std::abs(body_a->get_pos_x() - body_b->get_pos_x());
             float dy = std::abs(body_a->get_pos_y() - body_b->get_pos_y());
@@ -128,6 +131,10 @@ void World::update_world(float dt)
 {
     for(std::unique_ptr<Body>& body : m_bodies)
     {
+
+        if(body-> is_static())
+            continue;
+
         //gravity
         body->apply_force(0.f, m_gravity*body->get_mass());
         body->update(dt);
