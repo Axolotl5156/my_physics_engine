@@ -33,14 +33,7 @@ void FloatingBalls::run(AppContext config)
 
     for(BodyInit init : inits)
     {
-        std::unique_ptr<Shape> shape = std::make_unique<CircleShape>(15.f);
-        std::unique_ptr<Body> body = std::make_unique<Body>(
-            init.pos_x, init.pos_y,
-            init.vel_x, init.vel_y,
-            1.f,
-            std::move(shape)
-        );
-        world.add_body(std::move(body));
+        world.add_circle(init.pos_x, init.pos_y, init.vel_x, init.vel_y, 1.f, 15.f);
     }
 
     RendererSFML renderer(world.get_width(), world.get_height(), "floating balls");

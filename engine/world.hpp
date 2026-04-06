@@ -86,6 +86,29 @@ class World
         void add_body(std::unique_ptr<Body> body);
 
         /**
+         * @brief add a circle to the world
+         * @param pos_x x position for the circle
+         * @param pos_y y position for the circle
+         * @param vel_x initiale x velocity
+         * @param vel_y initiale y velocity
+         * @param mass the body's mass
+         * @param radius the circle's radius
+         */
+        void add_circle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float radius);
+
+        /**
+         * @brief add a circle to the world
+         * @param pos_x x position for the circle
+         * @param pos_y y position for the circle
+         * @param vel_x initiale x velocity
+         * @param vel_y initiale y velocity
+         * @param mass the body's mass
+         * @param width the rectangle's width
+         * @param height the rectangle's height
+         */
+        void add_rectangle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float width, float height);
+
+        /**
          * @brief update all bodies
          * @param dt step time
          */

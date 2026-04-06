@@ -1,4 +1,9 @@
 #include "world.hpp"
+
+#include "shape.hpp"
+#include "circleShape.hpp"
+#include "rectangleShape.hpp"
+
 #include <iostream>
 #include <math.h>
 
@@ -54,6 +59,20 @@ void World::set_restition(float restitution)
 void World::add_body(std::unique_ptr<Body> body)
 {
     m_bodies.push_back(std::move(body));
+}
+
+void World::add_circle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float radius)
+{
+    std::unique_ptr<Shape> shape = std::make_unique<CircleShape>(radius);
+    std::unique_ptr<Body> body = std::make_unique<Body>(pos_x, pos_y, vel_x, vel_y, mass, std::move(shape));
+    add_body(std::move(body));
+}
+
+void World::add_rectangle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float width, float height)
+{
+    std::unique_ptr<Shape> shape = std::make_unique<RectangleShape>(width, height);
+    std::unique_ptr<Body> body = std::make_unique<Body>(pos_x, pos_y, vel_x, vel_y, mass, std::move(shape));
+    add_body(std::move(body));
 }
 
 void World::bodies_to_bodies_collision()

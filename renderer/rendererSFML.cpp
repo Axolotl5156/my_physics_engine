@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "rendererSFML.hpp"
+#include "rectangleShape.hpp"
 #include "circleShape.hpp"
 
 RendererSFML::RendererSFML(float width, float height, const std::string &title):
@@ -106,6 +107,17 @@ void RendererSFML::draw_frame(World &world)
             drawable_circle.setFillColor(sf::Color::White);
 
             m_window.draw(drawable_circle);
+        }
+        if(RectangleShape *rectangle = dynamic_cast<RectangleShape*>(shape))
+        {
+            float width = rectangle->get_width();
+            float height = rectangle->get_height();
+            sf::RectangleShape drawable_rectangle({height, width});
+            drawable_rectangle.setOrigin({height/2, width/2});
+            drawable_rectangle.setPosition({body->get_pos_x(), body->get_pos_y()});
+            drawable_rectangle.setFillColor(sf::Color::White);
+
+            m_window.draw(drawable_rectangle);
         }
     }
 }

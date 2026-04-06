@@ -4,6 +4,7 @@
 #include "world.hpp"
 #include "body.hpp"
 #include "circleShape.hpp"
+#include "rectangleShape.hpp"
 #include "rendererSFML.hpp"
 
 void TestSim::run(AppContext config)
@@ -13,14 +14,8 @@ void TestSim::run(AppContext config)
     world.set_gravity(0.f);
     world.set_restition(1.f);
 
-    std::unique_ptr<Shape> shape_1 = std::make_unique<CircleShape>(10.f);
-    std::unique_ptr<Body> body_1 = std::make_unique<Body>(200.f, 200.f, 100.f, 100.f, 1.f, std::move(shape_1));
-
-    std::unique_ptr<Shape> shape_2 = std::make_unique<CircleShape>(10.f);
-    std::unique_ptr<Body> body_2 = std::make_unique<Body>(600.f, 200.f, -100.f, 100.f, 1.f, std::move(shape_2));
-
-    world.add_body(std::move(body_1));
-    world.add_body(std::move(body_2));
+    world.add_circle(100.f, 100.f, 100.f, 0.f, 1.f, 20.f);
+    world.add_circle(100.f, 200.f, 100.f, 100.f, 1.f, 20.f);
 
     RendererSFML renderer(world.get_width(), world.get_height(), "test sim");
 
