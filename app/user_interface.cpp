@@ -11,7 +11,7 @@ UserInterface::UserInterface()
     };
     m_simulations["floating_balls"] = []()
     {
-        return std::make_unique<FloatingBalls>();
+        return std::make_unique<FloatingBallsSimulation>();
     };
 }
 

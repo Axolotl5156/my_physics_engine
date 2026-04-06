@@ -17,7 +17,7 @@ I used some C++ Libraries
 
 you'll also need **CMake** version 3.28.3 or above for the build  
 **Doxygen** for documentation,  
-and **fmpgeg** for the recording (only if you wanna record).
+and **ffmpeg** for the recording (only if you wanna record).
 
 ### build
 

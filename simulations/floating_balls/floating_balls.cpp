@@ -14,7 +14,7 @@ struct BodyInit
     float vel_x, vel_y;
 };
 
-void FloatingBalls::run(AppContext config)
+void FloatingBallsSimulation::run(AppContext config)
 {
 
     World world(800, 600, 0.f, 1.f);
