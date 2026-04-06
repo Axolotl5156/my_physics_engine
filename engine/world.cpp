@@ -4,6 +4,8 @@
 #include "circleShape.hpp"
 #include "rectangleShape.hpp"
 
+#include "distance_constraint.hpp"
+
 #include <iostream>
 #include <math.h>
 
@@ -46,6 +48,11 @@ std::vector<std::unique_ptr<Body>>& World::get_bodies()
     return m_bodies;
 }
 
+std::vector<std::unique_ptr<Constraint>> &World::get_constraints()
+{
+    return m_constraints;
+}
+
 void World::set_gravity(float gravity)
 {
     m_gravity = gravity;
@@ -56,25 +63,39 @@ void World::set_restition(float restitution)
     m_restitution = restitution;
 }
 
-void World::add_body(std::unique_ptr<Body> body)
+Body * World::add_body(std::unique_ptr<Body> body)
 {
     m_bodies.push_back(std::move(body));
+    return m_bodies.back().get();
 }
 
-void World::add_circle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float radius, BodyType type)
+Body * World::add_circle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float radius, BodyType type)
 {
     std::unique_ptr<Shape> shape = std::make_unique<CircleShape>(radius);
     std::unique_ptr<Body> body = std::make_unique<Body>(pos_x, pos_y, vel_x, vel_y, mass, std::move(shape), type);
     add_body(std::move(body));
+    return m_bodies.back().get();
 }
 
-void World::add_rectangle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float width, float height, BodyType type)
+Body * World::add_rectangle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float width, float height, BodyType type)
 {
     std::unique_ptr<Shape> shape = std::make_unique<RectangleShape>(width, height);
     std::unique_ptr<Body> body = std::make_unique<Body>(pos_x, pos_y, vel_x, vel_y, mass, std::move(shape), type);
     add_body(std::move(body));
+    return m_bodies.back().get();
 }
 
+void World::add_constraint(std::unique_ptr<Constraint> constraint)
+{
+    m_constraints.push_back(std::move(constraint));
+}
+
+void World::add_distance_constraint(Body *body_a, Body *body_b)
+{
+    std::unique_ptr distance_constraint = std::make_unique<DistanceConstraint>(body_a, body_b);
+    add_constraint(std::move(distance_constraint)); 
+}
+ 
 void World::bodies_to_bodies_collision()
 {
     for(size_t i = 0; i < m_bodies.size(); ++i)
@@ -135,10 +156,10 @@ void World::update_world(float dt)
         if(body-> is_static())
             continue;
 
-        //gravity
+        //FORCES
         body->apply_force(0.f, m_gravity*body->get_mass());
         body->update(dt);
-
+        
         //collision
         float x = body->get_pos_x();
         float y = body->get_pos_y();
@@ -171,5 +192,13 @@ void World::update_world(float dt)
     }
 
     bodies_to_bodies_collision();
+
+    for(int i = 0; i < 10; ++i)
+    {
+        for(std::unique_ptr<Constraint> &constraint : m_constraints)
+        {
+            constraint->solve();
+        }
+    }
 
 }

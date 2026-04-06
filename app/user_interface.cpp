@@ -13,6 +13,10 @@ UserInterface::UserInterface()
     {
         return std::make_unique<FloatingBallsSimulation>();
     };
+    m_simulations["pendulum"] = []()
+    {
+        return std::make_unique<PendulumSimulation>();
+    };
 }
 
 void UserInterface::run()
