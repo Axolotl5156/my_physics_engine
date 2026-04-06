@@ -17,7 +17,7 @@ I used some C++ Libraries
 
 you'll also need **CMake** version 3.28.3 or above for the build  
 **Doxygen** for documentation,  
-and **fmpgeg** for the recording (only if you wanna record).
+and **ffmpeg** for the recording (only if you wanna record).
 
 ### build
 
@@ -67,6 +67,7 @@ here you can
 For now, two cases are available
 - a falling ball in a gravity field
 - some floating balls without gravity  
+- a simple pendulum
 
 More to come...
 
@@ -103,5 +104,5 @@ everything is handle by the UserInterface class
 
 I have some plans to upgrade this tiny project
 - add more simulation cases
-- add the possiblity to choose where to save the video
+- change the calcul methode from Euler (which isn't stable) to something better
 - allow the user to run a personalized simulation described in a JSON file

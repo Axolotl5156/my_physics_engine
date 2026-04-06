@@ -5,7 +5,7 @@
 /**
  * @brief a simulation of multiple boncing balls
  */
-class FloatingBallsSimulation : public ISimulation
+class PendulumSimulation : public ISimulation
 {
 
     public :

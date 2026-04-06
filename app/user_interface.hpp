@@ -6,6 +6,7 @@
 #include "simulation.hpp"
 #include "bouncing_ball.hpp"
 #include "floating_balls.hpp"
+#include "pendulum.hpp"
 #include "test_sim.hpp"
 
 #include "app_config.hpp"

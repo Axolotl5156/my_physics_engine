@@ -1,6 +1,6 @@
 #include "body.hpp"
 
-Body::Body(float pos_x, float pos_y, float vel_x, float vel_y, float fx, float fy, float mass, std::unique_ptr<Shape> shape):
+Body::Body(float pos_x, float pos_y, float vel_x, float vel_y, float fx, float fy, float mass, std::unique_ptr<Shape> shape, BodyType type):
 m_pos_x(pos_x),
 m_pos_y(pos_y),
 m_vel_x(vel_x),
@@ -8,10 +8,11 @@ m_vel_y(vel_y),
 m_fx(fx),
 m_fy(fy),
 m_mass(mass),
-m_shape(std::move(shape))
+m_shape(std::move(shape)),
+m_type(type)
 {}
 
-Body::Body(float pos_x, float pos_y, float vel_x, float vel_y, float mass, std::unique_ptr<Shape> shape):
+Body::Body(float pos_x, float pos_y, float vel_x, float vel_y, float mass, std::unique_ptr<Shape> shape, BodyType type):
 m_pos_x(pos_x),
 m_pos_y(pos_y),
 m_vel_x(vel_x),
@@ -19,10 +20,11 @@ m_vel_y(vel_y),
 m_fx(0.f),
 m_fy(0.f),
 m_mass(mass),
-m_shape(std::move(shape))
+m_shape(std::move(shape)), 
+m_type(type)
 {}
 
-Body::Body(float pos_x, float pos_y, float mass, std::unique_ptr<Shape> shape):
+Body::Body(float pos_x, float pos_y, float mass, std::unique_ptr<Shape> shape, BodyType type):
 m_pos_x(pos_x),
 m_pos_y(pos_y),
 m_vel_x(0.f),
@@ -30,7 +32,8 @@ m_vel_y(0.f),
 m_fx(0.f),
 m_fy(0.f),
 m_mass(mass),
-m_shape(std::move(shape))
+m_shape(std::move(shape)),
+m_type(type)
 {}
 
 //getters
@@ -74,6 +77,11 @@ Shape* Body::get_shape()
     return m_shape.get();
 }
 
+BodyType Body::get_type()
+{
+    return m_type;
+}
+
 //setters
 void Body::set_pos_x(float pos_x)
 {
@@ -110,6 +118,11 @@ void Body::set_mass(float mass)
     m_mass = mass;
 }
 
+bool Body::is_static()
+{
+    return m_type == BodyType::Static;
+}
+
 void Body::apply_force(float fx, float fy)
 {
     m_fx += fx;
@@ -124,6 +137,10 @@ void Body::reset_force()
 
 void Body::update(float dt)
 {
+
+    if(is_static())
+        return;
+ 
     float ax = m_fx / m_mass;
     float ay = m_fy / m_mass;
 

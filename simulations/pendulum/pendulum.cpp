@@ -1,21 +1,24 @@
+#include "pendulum.hpp"
 
-#include "bouncing_ball.hpp"
+#include <iostream>
 
 #include "world.hpp"
 #include "body.hpp"
 #include "circleShape.hpp"
 #include "rendererSFML.hpp"
 
-void BouncingBallSimulation::run(AppContext config)
+void PendulumSimulation::run(AppContext config)
 {
-    World world(800, 600);
-    world.set_gravity(981.f);
-    world.set_restition(0.8f);
 
-    world.add_circle(400.f, 100.f, 0.f, 0.f, 1.f, 10.f, BodyType::Dynamic);
+    World world(800, 800);
 
-    RendererSFML renderer(world.get_width(), world.get_height(), "Bouncing ball", sf::Color(20,20,20,255));
-    
+    Body *pivot = world.add_circle(400.f, 100.f, 0.f, 0.f, 1.f, 10.f, BodyType::Static);
+    Body *mass = world.add_circle(600.f, 100.f, 0.f, 0.f, 1.f, 10.f, BodyType::Dynamic);
+
+    world.add_distance_constraint(pivot, mass);
+
+    RendererSFML renderer(world.get_width(), world.get_height(), "pendulum");
+
     if(config.record_enable)
         renderer.enable_recording(config.output_file);
 
@@ -25,7 +28,6 @@ void BouncingBallSimulation::run(AppContext config)
     {
 
         float dt = clock.restart().asSeconds();
-
         renderer.handle_events();
 
         if(!renderer.is_paused())
@@ -36,10 +38,8 @@ void BouncingBallSimulation::run(AppContext config)
         renderer.clear();
         renderer.draw_frame(world);
         renderer.display();
-
     }
 
     if(config.record_enable)
         renderer.finalize_recording();
-
 }

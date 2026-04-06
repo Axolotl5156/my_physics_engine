@@ -4,6 +4,16 @@
 #include "shape.hpp"
 
 /**
+ * @brief the body type
+ * might be static or dynamic
+ */
+enum class BodyType
+{
+    Dynamic,
+    Static
+};
+
+/**
  * @brief Represent a physical object in the simulation
  * 
  * A body has a position, a velocity, a masse and a Shape.
@@ -21,6 +31,8 @@ class Body
 
         std::unique_ptr<Shape> m_shape;
 
+        BodyType m_type;
+
     public :
 
         /**
@@ -31,8 +43,9 @@ class Body
          * @param vel_y initial y velocity
          * @param mass the body's mass
          * @param shape geometrycal shape associate to this body 
+         * @param type body type, static or dynamic
          */
-        Body(float pos_x, float pos_y, float vel_x, float vel_y, float mass, std::unique_ptr<Shape> shape);
+        Body(float pos_x, float pos_y, float vel_x, float vel_y, float mass, std::unique_ptr<Shape> shape, BodyType type);
 
         /**
          * @brief secondary constructor
@@ -44,20 +57,21 @@ class Body
          * @param fy initial y forces
          * @param mass the body's mass
          * @param shape geometrycal shape associate to this body 
-         * 
+         * @param type body type, static or dynamic
          */
-        Body(float pos_x, float pos_y, float vel_x, float vel_y, float fx, float fy, float mass, std::unique_ptr<Shape> shape);
+        Body(float pos_x, float pos_y, float vel_x, float vel_y, float fx, float fy, float mass, std::unique_ptr<Shape> shape, BodyType type);
 
         /**
          * @brief secondary constructor
          * @param pos_x initial x position
          * @param pos_y initial y position
          * @param mass the body's mass
-         * @param shape geometrycal shape associate to this body 
+         * @param shape geometrycal shape associate to this body
+         * @param type body type, static or dynamic
          * 
          * initial velocity will be set to 0
          */
-        Body(float pos_x, float pos_y, float mass, std::unique_ptr<Shape> shape);
+        Body(float pos_x, float pos_y, float mass, std::unique_ptr<Shape> shape, BodyType type);
 
         /**
          * @brief position x getter
@@ -98,6 +112,11 @@ class Body
          * @brief shape getter
          */
         Shape *get_shape();
+
+        /**
+         * @brief body type getter
+         */
+        BodyType get_type();
 
         /**
          * @brief position x setter
@@ -144,6 +163,13 @@ class Body
          * @param mass new mass
          */
         void set_mass(float mass);
+
+        /**
+         * @brief check if body is static
+         * 
+         * return true if static, false if dynamic
+         */
+        bool is_static();
 
         /**
          * @brief Apply a force to the body

@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include "body.hpp"
+#include "constraint.hpp"
 
 /**
  * @brief represent a physical world, where all Body will evoluate
@@ -19,6 +20,7 @@ class World
         float m_restitution;
 
         std::vector<std::unique_ptr<Body>> m_bodies;
+        std::vector<std::unique_ptr<Constraint>> m_constraints; 
 
         void bodies_to_bodies_collision();
 
@@ -68,6 +70,11 @@ class World
         std::vector<std::unique_ptr<Body>>& get_bodies();
 
         /**
+         * @brief get list of constraints
+         */
+        std::vector<std::unique_ptr<Constraint>> &get_constraints();
+
+        /**
          * @brief gravity setter
          * @param gravity new gravity
          */
@@ -83,7 +90,7 @@ class World
          * @brief add a Body to the world
          * @param body the body to add
          */
-        void add_body(std::unique_ptr<Body> body);
+        Body * add_body(std::unique_ptr<Body> body);
 
         /**
          * @brief add a circle to the world
@@ -93,8 +100,9 @@ class World
          * @param vel_y initiale y velocity
          * @param mass the body's mass
          * @param radius the circle's radius
+         * @param type type of the circle, static or dynamic
          */
-        void add_circle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float radius);
+        Body * add_circle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float radius, BodyType type);
 
         /**
          * @brief add a circle to the world
@@ -105,8 +113,23 @@ class World
          * @param mass the body's mass
          * @param width the rectangle's width
          * @param height the rectangle's height
+         * @param type type of the rectangle, static or dynamic
          */
-        void add_rectangle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float width, float height);
+        Body * add_rectangle(float pos_x, float pos_y, float vel_x, float vel_y, float mass, float width, float height, BodyType type);
+
+        /**
+         * @brief add a new constraint to the world
+         */
+        void add_constraint(std::unique_ptr<Constraint> constraint);
+
+        /**
+         * @brief add a distance constraint between two bodies
+         * @param body_a the first body to link
+         * @param body_b the second body to link
+         * 
+         * the bodies will be constraint by the distance between theme at the creation of this link
+         */
+        void add_distance_constraint(Body *body_a, Body *body_b);
 
         /**
          * @brief update all bodies
