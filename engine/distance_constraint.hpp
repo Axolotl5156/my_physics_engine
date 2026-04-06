@@ -15,6 +15,9 @@ class DistanceConstraint : public Constraint
 
         DistanceConstraint(Body *body_a, Body *body_b);
 
+        Body *get_body_a();
+        Body *get_body_b();
+
         void solve();
 
 };

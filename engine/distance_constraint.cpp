@@ -11,6 +11,16 @@ m_body_b(body_b)
     m_lenght = sqrt(distance_x*distance_x + distance_y*distance_y);
 }
 
+Body *DistanceConstraint::get_body_a()
+{
+    return m_body_a;
+}
+
+Body *DistanceConstraint::get_body_b()
+{
+    return m_body_b;
+}
+
 void DistanceConstraint::solve()
 {
     float distance_x = m_body_a->get_pos_x() - m_body_b->get_pos_x();

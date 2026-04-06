@@ -4,6 +4,7 @@
 #include "rendererSFML.hpp"
 #include "rectangleShape.hpp"
 #include "circleShape.hpp"
+#include "distance_constraint.hpp"
 
 RendererSFML::RendererSFML(float width, float height, const std::string &title):
 m_is_paused(false),
@@ -92,6 +93,7 @@ void RendererSFML::handle_events()
 void RendererSFML::draw_frame(World &world)
 {
     std::vector<std::unique_ptr<Body>> &bodies = world.get_bodies();
+    std::vector<std::unique_ptr<Constraint>> &constraints = world.get_constraints();
 
     for(std::unique_ptr<Body> &body : bodies)
     {
@@ -118,6 +120,23 @@ void RendererSFML::draw_frame(World &world)
             drawable_rectangle.setFillColor(sf::Color::White);
 
             m_window.draw(drawable_rectangle);
+        }
+    }
+
+    for(std::unique_ptr<Constraint> &constraint : constraints)
+    {
+        if(DistanceConstraint *dist = dynamic_cast<DistanceConstraint*>(constraint.get()))
+        {
+            Body *body_a = dist->get_body_a();
+            Body *body_b = dist->get_body_b();
+
+            sf::Vertex line[] =
+            {
+                sf::Vertex(sf::Vector2f(body_a->get_pos_x(), body_a->get_pos_y()), sf::Color::Red),
+                sf::Vertex(sf::Vector2f(body_b->get_pos_x(), body_b->get_pos_y()), sf::Color::Red)
+            };
+
+            m_window.draw(line, 2, sf::Lines);
         }
     }
 }

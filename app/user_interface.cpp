@@ -63,7 +63,7 @@ void UserInterface::handle_command(const std::string &input)
         cmd_help();
     else if(cmd.compare("quit") == 0)
         cmd_quit();
-    else if(cmd.compare("testsim") == 0)
+    else if(cmd.compare("test") == 0)
         cmd_testsim();
     else
     {
